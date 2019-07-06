@@ -16,6 +16,7 @@
 
 <div>
     <ul>
+        <span th:if="${files.size() == 0}">No file uploaded</span>
         <li th:each="file : ${files}">
             <a th:href="${file}" th:text="${file}" />
         </li>
