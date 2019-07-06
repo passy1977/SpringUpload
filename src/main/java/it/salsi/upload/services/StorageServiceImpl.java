@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -64,12 +65,14 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public Resource loadAsResource(String filename) {
-        return resourceLoader.getResource(
-                "classpath:data/" + filename);
+        return resourceLoader.getResource("classpath:data/" + filename);
     }
 
     @Override
     public void deleteAll() {
-
+        if (filePath == null) {
+            return;
+        }
+        Arrays.asList(filePath.toFile().listFiles()).forEach(File::delete);
     }
 }
